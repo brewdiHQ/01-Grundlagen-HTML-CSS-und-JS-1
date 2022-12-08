@@ -20,6 +20,7 @@ class Computer {
     static INIT ="NO SET"
     static computerCounter = 0;
 
+    //Ein privates Propertie (Eigenschaft) sowie getter und setter für dieses Property
     #computerName = "Toshiba"
     get computerName (){ return this.#computerName }
     set computerName(newName){ this.#computerName = newName }
@@ -28,7 +29,7 @@ class Computer {
     get arbeitsspeicher(){ return this.#arbeitsspeicher }
 
     #CPU = "Ryzen"
-    setCPU(newCPU) {
+    set CPU(newCPU) {
         this.#CPU = newCPU
     }
 
@@ -43,6 +44,9 @@ class Computer {
     }
 }
 
+/**
+ * Eine neue Klasse "Spielkonsole", die von der Klasse Computer abgeleitet wird
+ */
 class Spielkonsole extends Computer{
     #grafikkarte = "richtig gut"
     constructor () {
@@ -50,6 +54,10 @@ class Spielkonsole extends Computer{
     }
 }
 
+/**
+ * Eine Weitere Klasse Gameboy, die von Spielekonsole abgeleitet wird. Damit
+ * Ist sie über Spielekonsole von "Computer" abgeleitet
+ */
 class Gameboy extends Spielkonsole{
     #akkukapazitaet = Computer.INIT
     get akkukapazitaet () {return this.#akkukapazitaet }
@@ -60,11 +68,19 @@ class Gameboy extends Spielkonsole{
     }
 }
 
+/**
+ * Eine Klasse Farbe mit statische Variablen (=> Klassenvariablen). Diese können
+ * direkt über den Klassennamen abgerufen werden
+ */
 class Farbe{
     static ROT = "rot";
     static GELB = "gelb";
 }
 
+
+/**
+ * Der Einstiegspunkt für die Demo-App
+ */
 function start () {
     let xbox = new Spielkonsole();
     console.log( "Arbeitsspeicher meiner Konsole: "+ xbox.arbeitsspeicher)
@@ -105,5 +121,6 @@ function start () {
 }
 
 
-
+// Erst an dieser Stelle wird das Programm gestartetet, 
+// nachdem alles andere zuvor deklariert und definiert wurd
 start()
