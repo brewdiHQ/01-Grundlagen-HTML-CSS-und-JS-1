@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    
+</head>
+<header style="text-align: center;">
+    <h1>Mein erstes JavaScript</h1>
+    <img id="mein-logo" src="">
+</header>
+<body>
+    <script>
+        function halloAlert(){
+            alert ("Hallo JavaScript")
+            logmyString();
+        }
+        function halloPrompt(){
+            prompt ("Hallo JavaScript Prompt")
+        }
+        function halloConfirm(){
+            confirm ("Hallo JavaScript Confirmation")
+        }
+
+        function logmyString(){
+            console.log("super");
+            console.error("ach du kacke!");
+            console.info("alles easy aber evtl. sollten wie bei gelegneheit mal ...");
+            console.warn("ahhhm wird zeit, ne");
+        }
+
+        function onclick_btn(logstr){
+            console.log ("läuft :-)" + logstr);
+
+        }
+
+        //halloAlert();
+        //halloPrompt();
+        //halloConfirm();  
+    </script>
+    <div id ="content-id" class ="content"></div>
+    <input type="button" value="Drücken" title="Drücken" onclick="onclick_btn('log mal das')">
+    
+    
+</body>
+<footer>
+    
+</footer>

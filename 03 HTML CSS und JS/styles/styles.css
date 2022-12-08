@@ -1,0 +1,13 @@
+h1 {
+    color: darkgray;
+    text-align: center;
+}
+header, footer{
+    background-color: aqua;
+    border: 2px;
+    border-style: solid;
+}
+
+.content{
+    background-color: red;
+}
