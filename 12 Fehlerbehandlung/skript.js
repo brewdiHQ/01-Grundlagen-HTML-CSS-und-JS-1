@@ -32,6 +32,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 */
 
+
+
+
 // Try-Catch-Block
 try{
     /** Hier ist der try-Block.
@@ -55,8 +58,10 @@ try{
 }
 
 
-
-class UeberlaufError extends Error{
+// Eine selbst definierte Fehlerklasse "UeberlaufError".
+// Diese kann verwendet werden um Fehler an die eigenen Anforderungen anzupassen
+// und z.b aussagekräftigere Fehlermeldungen zu erhalten
+class UeberlaufError extends Error {
     constructor(errMsg){
         super(errMsg)
         this.name = "UeberlaufError";
@@ -72,32 +77,40 @@ try {
     //let o = new KlasseDieEsNichtGibt();
     //throw new SyntaxError("Hallo das ist ein Syntaxfehler", "someFile.js", 10);
     //throw new TypeError("type fehler")
+    
+    
+    // Nachfolgende Abshnitte sollen einen möglichen Fehler provozieren.
+    // Annahme: Der Entwickler hat versehendlich eine Endlosschleife generiert, da 
+    //  1. die While Schleife auf Gleichheit und nicht kleiner-gleich prüft
+    //  2. Die Zählvariable i nicht erhöt wird
+    // ABER es wurd eine Ausnahme situation definiert: Wenn schleifenDurchlaeufe größer als 50 ist wird die Schleife abgebrochen
     let i = 10
-    let fehlerzähler =0;
+    let schleifenDurchlaeufe =0;
     let text
     while (i == 10) {
         text = "The number is " + i +"\n";
         console.log(text)
         
-        fehlerzähler++
+        schleifenDurchlaeufe++
 
-        if(fehlerzähler> 50){
+        if(schleifenDurchlaeufe> 50){
             throw new UeberlaufError("das hätte nie passieren sollen")
         }
     }
 
-// Anhand eines Buchstabens wird der ASCII-Wert bestimmt
-const dasZeichen ="A"
-const result = dasZeichen.charCodeAt(0);
-console.log(`Der ASCII-Wert für ${dasZeichen} lautet: ${result}`);
-
-//Anahnd des ASCII-Dezimalcodes wird das Zeichen ausgegben
-console.log(String.fromCharCode(44))
-
     
     //machwas();
+
+    // Nachdem eine Exception "geworfen" wurde, wird die Programmausführung 
+    // unterbroch und sprint in den catch-block.
+    // Der nachfolgende Code-Abschnitt wird niemals erreicht.
     console.log("Das wird nie erreicht")
+
+
+
 } catch (ausnahme) {
+
+    // Je nach Art des erkannten Fehler kann eine andere Ausnahmebehandlung eingeleitet werden
     if (ausnahme instanceof ReferenceError){     
         console.log("ich muss was mit dem Referenz Error machen")
     }
@@ -107,12 +120,17 @@ console.log(String.fromCharCode(44))
     else if(ausnahme instanceof TypeError){
         console.log("ich muss was mit dem TypeError machen")
     }
+    else if(ausnahme instanceof UeberlaufError){
+        console.log("ich muss was mit dem UeberlaufError machen")
+    }
     else{
 
     }
-    
-    console.error(
-        "[FEHLERTYP]:\t" + ausnahme.name + 
+
+    //console.log(ausnahme);
+    console.error(        
+        "[FEHLERTYP]:\t" + typeof(ausnahme) + 
+        "\n[FEHLERNAME]:\t" + ausnahme.name + 
         "\n[NACHRICHT]:\t" + ausnahme.message +  
         "\n[URSACHE]:\t" + ausnahme.cause +
         "\n[STACK]:\t" + ausnahme.stack)
